@@ -21,7 +21,7 @@ export default function handler(
   const {img, ans} = req.query as Data;
   const f = "data.txt";
 
-  fs.appendFileSync(f, `${img}, ${ans}\n`);
+  fs.appendFileSync(f, `${img}?${ans}\n`);
 
   res.status(200).json({ ok: true })
 }
