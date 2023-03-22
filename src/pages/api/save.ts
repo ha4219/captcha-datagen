@@ -2,6 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import fs from 'fs'
 
+
 type Data = {
   img: string;
   ans: string;
