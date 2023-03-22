@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import useAudio from '@/hooks/useAudio';
 import dynamic from 'next/dynamic';
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
@@ -10,6 +11,8 @@ const Header = dynamic(
 
 
 export default function Home() {
+  const {audios} = useAudio({ effect: "/effect.mp3" });
+  const audio = audios.get('effect');
   const [image, setImage] = useState<string | ArrayBuffer | null>(null);
   const [cnt, setCnt] = useState(0);
   const getImage = () => {
@@ -28,6 +31,9 @@ export default function Home() {
 
   const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
+    if (audio) {
+      audio();
+    }
     const target = e.target as typeof e.target & {
       input: { value: string };
     }
