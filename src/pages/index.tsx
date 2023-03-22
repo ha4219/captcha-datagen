@@ -31,9 +31,6 @@ export default function Home() {
 
   const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
-    if (audio) {
-      audio();
-    }
     const target = e.target as typeof e.target & {
       input: { value: string };
     }
@@ -45,6 +42,11 @@ export default function Home() {
     const data: {ok: boolean} = await res.json();
     
     getImage();
+    if (cnt % 10 == 9) {
+      if (audio) {
+        audio();
+      }
+    }
     setCnt(prev => prev + 1);
     target.input.value = "";
     // print(e.)
