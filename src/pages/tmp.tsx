@@ -23,7 +23,6 @@ export default function Home() {
         reader.readAsDataURL(res);
         reader.onloadend = () => {
           let base64data = reader.result;
-          // console.log(base64data);
           setImage(base64data);
         }
       });
@@ -38,7 +37,13 @@ export default function Home() {
       alert('다시 입력하세요');
       return;
     }
-    const res = await fetch(`/api/save?img=${image}&ans=${target.input.value.toUpperCase()}`)
+    const res = await fetch(`/api/upload`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({img: image, ans: target.input.value.toUpperCase()})
+    })
     const data: {ok: boolean} = await res.json();
     
     getImage();
